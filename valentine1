@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>וולנטיין 🩷</title>
+
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      font-family: "Arial Rounded MT Bold", Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(135deg, #ffd1dc, #ffb6c1);
+      overflow: hidden;
+    }
+
+    .card {
+      background: #fff0f5;
+      padding: 35px 25px;
+      border-radius: 28px;
+      text-align: center;
+      width: 90%;
+      max-width: 360px;
+      box-shadow: 0 15px 40px rgba(255, 105, 135, 0.35);
+    }
+
+    h1 {
+      margin-bottom: 25px;
+      font-size: 24px;
+      color: #ff4d88;
+    }
+
+    .buttons {
+      position: relative;
+      height: 160px;
+      margin-top: 10px;
+    }
+
+    button {
+      font-size: 18px;
+      padding: 14px 28px;
+      border: none;
+      border-radius: 18px;
+      cursor: pointer;
+      position: absolute;
+      transition: 0.25s ease;
+      white-space: nowrap;
+    }
+
+    #yes {
+      background: linear-gradient(135deg, #ff6fa5, #ff4d88);
+      color: white;
+      left: 50%;
+      top: 0;
+      transform: translateX(-50%);
+      box-shadow: 0 6px 15px rgba(255, 77, 136, 0.4);
+    }
+
+    #no {
+      background: #ffe4ec;
+      color: #ff4d88;
+      left: 50%;
+      top: 80px;
+      transform: translateX(-50%);
+    }
+
+    /* לבבות */
+    .heart {
+      position: fixed;
+      bottom: -20px;
+      animation: floatUp 4s linear forwards;
+      pointer-events: none;
+    }
+
+    @keyframes floatUp {
+      0% {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-100vh) scale(1.6);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="card">
+    <h1>רוצה להיות הוולנטיין שלי? 🩷</h1>
+
+    <div class="buttons" id="buttonArea">
+      <button id="yes">כן 🥰</button>
+      <button id="no">לא 😶</button>
+    </div>
+  </div>
+
+  <script>
+    const noBtn = document.getElementById("no");
+    const yesBtn = document.getElementById("yes");
+    const area = document.getElementById("buttonArea");
+
+    function moveButton() {
+      const areaRect = area.getBoundingClientRect();
+      const btnRect = noBtn.getBoundingClientRect();
+      const padding = 10;
+
+      const maxX = areaRect.width - btnRect.width - padding;
+      const maxY = areaRect.height - btnRect.height - padding;
+
+      const x = Math.random() * maxX;
+      const y = Math.random() * maxY;
+
+      noBtn.style.left = x + "px";
+      noBtn.style.top = y + "px";
+      noBtn.style.transform = "none"; // מבטל את המרכז
+    }
+
+    noBtn.addEventListener("touchstart", moveButton);
+    noBtn.addEventListener("mouseover", moveButton);
+
+    function createHeart() {
+      const heart = document.createElement("div");
+      heart.className = "heart";
+      heart.innerHTML = ["💗","💖","💞","💕"][Math.floor(Math.random()*4)];
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.fontSize = 18 + Math.random() * 22 + "px";
+      document.body.appendChild(heart);
+      setTimeout(() => heart.remove(), 4000);
+    }
+
+    yesBtn.addEventListener("click", () => {
+      setInterval(createHeart, 180);
+      document.body.innerHTML = `
+        <div style="color:#ff4d88;text-align:center;font-size:26px;padding:30px;">
+          <h1>כאילו שהייתה לך ברירה 😌💗</h1>
+          <p>וולנטיין שלי 🩷</p>
+        </div>
+      `;
+    });
+  </script>
+
+</body>
+</html>
